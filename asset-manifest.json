@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.4a28adf1.css",
-    "main.js": "/static/js/main.4d9b58c4.js",
-    "static/js/453.343f6cdd.chunk.js": "/static/js/453.343f6cdd.chunk.js",
-    "index.html": "/index.html",
-    "main.4a28adf1.css.map": "/static/css/main.4a28adf1.css.map",
-    "main.4d9b58c4.js.map": "/static/js/main.4d9b58c4.js.map",
-    "453.343f6cdd.chunk.js.map": "/static/js/453.343f6cdd.chunk.js.map"
+    "main.css": "/Simple-Weather/static/css/main.4a28adf1.css",
+    "main.js": "/Simple-Weather/static/js/main.43d0219e.js",
+    "static/js/453.35476240.chunk.js": "/Simple-Weather/static/js/453.35476240.chunk.js",
+    "index.html": "/Simple-Weather/index.html",
+    "main.4a28adf1.css.map": "/Simple-Weather/static/css/main.4a28adf1.css.map",
+    "main.43d0219e.js.map": "/Simple-Weather/static/js/main.43d0219e.js.map",
+    "453.35476240.chunk.js.map": "/Simple-Weather/static/js/453.35476240.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4a28adf1.css",
-    "static/js/main.4d9b58c4.js"
+    "static/js/main.43d0219e.js"
   ]
 }
