@@ -3,7 +3,7 @@
 > This was written in 4 hours for a lab test at my college 
 but I feel like I might want to work on it more hence this repo.
 
-A studpily simple weather application written built with React. 
+A studpily simple weather application built with React. 
 Click [here](https://britto.tech/weather) for a demo
 
 TODO:
