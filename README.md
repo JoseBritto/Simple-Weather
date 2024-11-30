@@ -4,7 +4,7 @@
 but I feel like I might want to work on it more hence this repo.
 
 A studpily simple weather application built with React. 
-Click [here](https://britto.tech/simple-weather) for a demo
+Click [here](https://britto.tech/Simple-Weather) for a demo
 
 TODO:
  - [ ] Migrate to OpenMeteo's API
