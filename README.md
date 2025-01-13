@@ -7,8 +7,6 @@ A studpily simple weather application built with React.
 Click [here](https://britto.tech/Simple-Weather) for a demo
 
 TODO:
- - [ ] Migrate to OpenMeteo's API
  - [ ] Show next weeks weather below current weather
- - [ ] Ability to save locations and choose a default one
- - [ ] Ability to automatically detect user's current location and show relevant weather
+ - [x] Ability to automatically detect user's current location and show relevant weather
 
