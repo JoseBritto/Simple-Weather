@@ -9,12 +9,43 @@ import InfoPage from './InfoPage';
 export default function WeatherPage() {
 
     const apiUrlTemplate = 'https://api.openweathermap.org/data/2.5/weather?q=####&units=metric&appid=6149ab1a1e090372aa72915996763f72';
+    const geoTemplateUrl = 'https://nominatim.openstreetmap.org/reverse?format=geojson&lat=1111&lon=2222';
     let [todayApiUrl, setUrl] = useState('https://api.openweathermap.org/data/2.5/weather?q=Toronto&units=metric&appid=6149ab1a1e090372aa72915996763f72');
-
+    let [canLocate, setCanLocate] = useState(false);
     let [weather, setWeather] = useState(null);
     let [isInLocEditMode, setIsInLocEditMode] = useState(false);
     let [location, setLocation] = useState({city: 'Toronto', country: 'CA'});
     let [isInfoMode, setIsInfoMode] = useState(false);
+
+    useEffect(() => {
+        if ("geolocation" in navigator) {
+            console.log("Yes");
+            navigator.geolocation.getCurrentPosition( async (position) => {
+                console.log(position.coords.latitude + ' , '+ position.coords.longitude);
+                const geoUrl = geoTemplateUrl.replace('1111', position.coords.latitude).replace('2222', position.coords.longitude);
+                try{
+                    const response = await fetch(geoUrl);
+                    const data = await response.json();
+                    let city = data?.features[0]?.properties?.address?.city;
+                    let country = data?.features[0]?.properties?.address?.country_code;
+                    if (city && country) {
+                        console.log("Setting Location to " + city + ", "+ country);
+                        setLocation({city: city, country: country.toUpperCase()});
+                        setCanLocate(true);
+                    }
+                } catch (err) {
+                    console.log(err);
+                    setCanLocate(false);
+                }
+              }, (err) => {
+                console.log(err);
+                setCanLocate(false);
+              });
+        } else {
+            console.log('Not available!');
+            setCanLocate(false);
+        }
+    }, []);
 
     useEffect(() => {
         const fetchWeather = async () => {
@@ -49,14 +80,14 @@ export default function WeatherPage() {
     if(isInLocEditMode) {
         return (
             <>
-                <Header iconUrl={weather ? ('https://openweathermap.org/img/wn/'+ weather.weather[0].icon +'.png') : null} currentLocation={location} setEditMode={setIsInLocEditMode} editMode={isInLocEditMode} setInfoMode={setIsInfoMode} infoMode={isInfoMode} />
+                <Header canLocate={canLocate} iconUrl={weather ? ('https://openweathermap.org/img/wn/'+ weather.weather[0].icon +'.png') : null} currentLocation={location} setEditMode={setIsInLocEditMode} editMode={isInLocEditMode} setInfoMode={setIsInfoMode} infoMode={isInfoMode} />
                 <LocationEditPage setLoc={setLocation} />
             </>
         );
     } else if(isInfoMode) {
         return (
             <>
-                <Header iconUrl={weather ? ('https://openweathermap.org/img/wn/'+ weather.weather[0].icon +'.png') : null} currentLocation={location} setEditMode={setIsInLocEditMode} editMode={isInLocEditMode} setInfoMode={setIsInfoMode} infoMode={isInfoMode} />
+                <Header canLocate={canLocate} iconUrl={weather ? ('https://openweathermap.org/img/wn/'+ weather.weather[0].icon +'.png') : null} currentLocation={location} setEditMode={setIsInLocEditMode} editMode={isInLocEditMode} setInfoMode={setIsInfoMode} infoMode={isInfoMode} />
                 <InfoPage />
             </>
         );
@@ -64,7 +95,7 @@ export default function WeatherPage() {
 
     return (
         <>
-            <Header iconUrl={weather ? ('https://openweathermap.org/img/wn/'+ weather.weather[0].icon +'.png') : null} currentLocation={location} setEditMode={setIsInLocEditMode} editMode={isInLocEditMode} setInfoMode={setIsInfoMode} infoMode={isInfoMode} />
+            <Header canLocate={canLocate} iconUrl={weather ? ('https://openweathermap.org/img/wn/'+ weather.weather[0].icon +'.png') : null} currentLocation={location} setEditMode={setIsInLocEditMode} editMode={isInLocEditMode} setInfoMode={setIsInfoMode} infoMode={isInfoMode} />
             { weather ? (
                     <MainContent 
                         temp={Math.round(weather.main.temp)}

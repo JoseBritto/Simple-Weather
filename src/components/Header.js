@@ -1,11 +1,16 @@
 import './css/Header.css';
 
-export default function Header ({iconUrl, currentLocation, setEditMode, editMode, setInfoMode, infoMode}) {
+export default function Header ({canLocate, iconUrl, currentLocation, setEditMode, editMode, setInfoMode, infoMode}) {
     return (
     <header>
         <div className="left">
             <img src={iconUrl} />
             <span>{currentLocation.city} </span>
+            {canLocate ? 
+                (<></>) 
+                : 
+                (<svg style={{marginLeft: '5px', marginTop: '-10px'}}  xmlns="http://www.w3.org/2000/svg" height="12px" viewBox="0 -960 960 960" width="12px" fill="#D9D9D9"><path d="M516-120 402-402 120-516v-56l195-73-203-203 57-57 736 736-57 57-203-203-73 195h-56Zm191-361-63-63 60-160-160 60-63-63 359-133-133 359ZM542-268l41-109-206-206-109 41 196 78 78 196Zm52-326ZM480-480Z"/></svg>)
+            }
         </div>
         <div className="right">
             
